@@ -1,0 +1,29 @@
+-- Table: public.Task
+
+-- DROP TABLE IF EXISTS public."Task";
+
+CREATE TABLE IF NOT EXISTS public."Task"
+(
+    "TaskID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "TaskTitle" character varying COLLATE pg_catalog."default" NOT NULL,
+    "Deadline" date NOT NULL,
+    "Status" character varying COLLATE pg_catalog."default" NOT NULL,
+    "WorkerID" integer NOT NULL,
+    "ProjectID" integer NOT NULL,
+    CONSTRAINT "Task_pkey" PRIMARY KEY ("TaskID"),
+    CONSTRAINT "TaskFkeyProject" FOREIGN KEY ("ProjectID")
+        REFERENCES public."Project" ("ProjectID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID,
+    CONSTRAINT "TaskFkeyWorker" FOREIGN KEY ("WorkerID")
+        REFERENCES public."Worker" ("WorkerID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+        NOT VALID
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Task"
+    OWNER to postgres;

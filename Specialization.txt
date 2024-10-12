@@ -1,0 +1,16 @@
+-- Table: public.Specialization
+
+-- DROP TABLE IF EXISTS public."Specialization";
+
+CREATE TABLE IF NOT EXISTS public."Specialization"
+(
+    "SpecID" integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),
+    "SpecName" character varying(100) COLLATE pg_catalog."default" NOT NULL,
+    "NumOfWorkers" integer NOT NULL,
+    CONSTRAINT "Specialization_pkey" PRIMARY KEY ("SpecID")
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Specialization"
+    OWNER to postgres;

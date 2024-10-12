@@ -1,0 +1,23 @@
+-- Table: public.Project/Worker
+
+-- DROP TABLE IF EXISTS public."Project/Worker";
+
+CREATE TABLE IF NOT EXISTS public."Project/Worker"
+(
+    "ProjectID" integer NOT NULL,
+    "WorkerID" integer NOT NULL,
+    CONSTRAINT "Project/Worker_pkey" PRIMARY KEY ("ProjectID", "WorkerID"),
+    CONSTRAINT "Project/Worker_ProjectID_fkey" FOREIGN KEY ("ProjectID")
+        REFERENCES public."Project" ("ProjectID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT "Project/Worker_WorkerID_fkey" FOREIGN KEY ("WorkerID")
+        REFERENCES public."Worker" ("WorkerID") MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public."Project/Worker"
+    OWNER to postgres;
